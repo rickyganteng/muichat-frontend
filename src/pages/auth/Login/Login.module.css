@@ -1,0 +1,27 @@
+.colorlogin {
+  color: #7e98df;
+  text-align: center;
+}
+.textright {
+  text-align: right;
+}
+.button {
+  background: #7e98df;
+  border-radius: 70px;
+  width: 360px;
+}
+.buttonBorder {
+  border-radius: 70px;
+  width: 360px;
+}
+.center {
+  text-align: center;
+}
+.border {
+  border-radius: 40px;
+}
+.bg {
+  background-color: #e5e5e5;
+  height: 700px;
+  position: absolute;
+}
