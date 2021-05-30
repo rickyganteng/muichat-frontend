@@ -1,3 +1,31 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap"); */
+
+@media (max-width: 512px) {
+  .mainColChat {
+    display: none !important;
+  }
+  .mainCard {
+    padding: 10px 15px !important;
+  }
+  .formMessage {
+    margin: 10px !important;
+    width: 100% !important;
+  }
+  .cardRoom {
+    position: fixed;
+    top: 0;
+  }
+  .plusMessage {
+    padding-top: 30px !important;
+  }
+  .sticker {
+    padding-top: 30px !important;
+  }
+  .pics {
+    padding-top: 30px !important;
+  }
+}
+
 .chat {
   max-width: 100%;
   border: 1px solid #ddd;
@@ -24,11 +52,14 @@ h2 {
 }
 
 .chatWindow {
-  height: 400px;
+  height: 535px;
   overflow: auto;
   background: #f9f9f9;
+  overflow-y: scroll;
 }
-
+.left {
+  overflow-y: scroll;
+}
 .output p {
   text-align: left;
   padding: 14px 0px;
@@ -68,4 +99,258 @@ h2 {
   padding: 12px 0;
   width: 100%;
   border-radius: 0 0 2px 2px;
+}
+.mainCard {
+  padding: 43px 30px;
+  border: none;
+}
+.mainCol {
+  height: 650px;
+  padding: 0px;
+  border-right: 1px solid #e5e5e5;
+  overflow-y: scroll;
+  flex-wrap: nowrap;
+}
+.title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 29px;
+  line-height: 34px;
+  text-align: left;
+  letter-spacing: -0.165px;
+  color: #7e98df;
+  cursor: pointer;
+}
+.drop {
+  float: right;
+  background-color: white !important;
+  border: white;
+  padding: 0px;
+}
+.drop:focus {
+  box-shadow: none !important;
+}
+.menuDrop {
+  background: #7e98df;
+  border-radius: 35px 10px 35px 35px;
+  margin-top: 39px !important;
+  border: #7e98df;
+}
+.item {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+  color: #ffffff;
+  margin: 10px 40px;
+}
+.item:hover {
+  width: 70px;
+  background-color: #7e98df;
+  color: #555;
+}
+
+.cardProfile {
+  margin-top: 50px;
+  border: none;
+  cursor: pointer;
+}
+.profileImg {
+  width: 82px;
+  height: 82px;
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+.profileName {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: -0.165px;
+  text-align: center;
+  color: #232323;
+}
+.profileId {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 1.335px;
+  color: #848484;
+}
+.cardContact {
+  margin-top: 40px;
+  width: 100%;
+  border: none;
+}
+.searchMessage {
+  height: 60px;
+  background: #fafafa;
+  border-radius: 15px;
+}
+.searchMessage::placeholder {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+  letter-spacing: -0.165px;
+  color: #848484;
+}
+
+.plus {
+  padding-top: 15px;
+  cursor: pointer;
+}
+.mainColChat {
+  padding-top: 350px;
+}
+.roomChat {
+  padding: 0px;
+}
+.mainTextChat {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  text-align: center;
+  line-height: 28px;
+  color: #848484;
+}
+.contactList {
+  padding: 15px;
+  border: none;
+  cursor: pointer;
+}
+.ppImg {
+  width: 55px;
+  margin-top: 15px;
+}
+.name {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: -0.165px;
+  color: #232323;
+  margin-bottom: 10px;
+  margin-top: 18px;
+}
+.bio {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: -0.165px;
+  color: #7e98df;
+}
+.time {
+  margin-top: 18px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: -0.165px;
+  color: #848484;
+}
+.notif {
+  background: #7e98df;
+  border-radius: 30px;
+  border: #7e98df 1px solid;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  letter-spacing: -0.165px;
+  color: #ffffff;
+  float: right;
+}
+.roomImg {
+  width: 64px;
+  height: 64px;
+}
+.cardRoom {
+  padding: 28px 53px;
+  border: none;
+}
+.imgMenuProfile {
+  float: right;
+  padding: 20px;
+  cursor: pointer;
+}
+.nameFriend {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: left;
+  letter-spacing: -0.165px;
+  color: #232323;
+  margin-bottom: 7px;
+  margin-left: 8px;
+  margin-top: 10px;
+}
+.statusFriend {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: left;
+  letter-spacing: -0.165px;
+  color: #7e98df;
+  margin-left: 8px;
+}
+.cardMessage {
+  position: fixed;
+  bottom: 0px;
+  border: none;
+}
+.chatRoom {
+  padding: 0px;
+}
+.formMessage {
+  background: #fafafa;
+  border-radius: 15px;
+  width: 912px;
+  height: 60px;
+  margin: 30px 50px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: left;
+  letter-spacing: -0.165px;
+  color: #848484;
+  border: none;
+}
+.formMessage::placeholder {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: left;
+  letter-spacing: -0.165px;
+  color: #848484;
+}
+.formMessage:focus {
+  box-shadow: none;
+}
+.plusMessage {
+  padding-top: 50px;
+  cursor: pointer;
+}
+.sticker {
+  padding-top: 50px;
+  cursor: pointer;
+}
+.pics {
+  padding-top: 50px;
+  cursor: pointer;
+}
+.profile {
+  cursor: pointer;
+}
+.handleImage {
+  cursor: pointer;
 }

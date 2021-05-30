@@ -1,0 +1,128 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap"); */
+
+.mainCard {
+  padding: 43px 30px;
+  border: none;
+}
+.cardProfile {
+  border: none;
+}
+.cardEdit {
+  border: none;
+}
+.profileId {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #7e98df;
+}
+.profileImg {
+  width: 82px;
+  height: 82px;
+  margin: 0 auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.profileName {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: -0.165px;
+  text-align: center;
+  color: #232323;
+  margin-bottom: 7px;
+}
+.imgBack {
+  cursor: pointer;
+}
+.profileId1 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 1.335px;
+  color: #848484;
+  text-align: center;
+}
+.title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 23px;
+  color: #232323;
+  margin-bottom: 18px;
+}
+.phone {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 1.335px;
+  color: #232323;
+  margin-bottom: 7.5px;
+}
+.changePhone {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: -0.17px;
+  color: #7e98df;
+  text-decoration: none;
+  margin-bottom: 51.5px;
+  cursor: pointer;
+}
+.textId {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #232323;
+  margin-bottom: 8px;
+}
+.userName {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: -0.17px;
+  color: #848484;
+  margin-bottom: 52px;
+}
+.changePass {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  line-height: 20px;
+  color: #232323;
+  margin-bottom: 26px;
+}
+.clickChange {
+  cursor: pointer;
+}
+.modalPhone {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 23px;
+  color: #232323;
+  margin-bottom: 18px;
+  text-align: center;
+  margin-top: 30px;
+}
+.btn {
+  width: 100%;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 23px;
+  color: white;
+  background-color: #7e98df;
+  border: #7e98df;
+  margin-bottom: 18px;
+  text-align: center;
+  margin-top: 30px;
+}

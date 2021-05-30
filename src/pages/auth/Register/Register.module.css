@@ -32,14 +32,20 @@
   .pass {
     position: absolute;
     right: 40px !important;
-    top: 268px !important;
+    top: 350px !important;
     cursor: pointer;
   }
+}
+.loading {
+  width: 120px;
+  height: 120px;
+  margin: 145px;
+  margin-left: 500px;
 }
 .pass {
   position: absolute;
   right: 100px;
-  top: 295px;
+  top: 380px;
   cursor: pointer;
 }
 .alert {
@@ -201,4 +207,7 @@
   color: #7e98df;
   margin-top: 35px;
   text-align: center;
+}
+.btnBack {
+  cursor: pointer;
 }

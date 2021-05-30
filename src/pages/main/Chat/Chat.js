@@ -1,141 +1,481 @@
 import { useState, useEffect } from "react";
-import Navbar from "../../../components/Navbar";
+import { connect } from "react-redux";
+import { getDataId } from "../../../redux/action/user";
+
+import CardEdit from "../../../components/EditProfile/editProfile";
+
 import styles from "./Chat.module.css";
-import { Container, Form, Row, Col, InputGroup, FormControl, Image } from "react-bootstrap";
-import gambar from "../../../assets/img/bx_bx-search.png"
+import sample from "../../../assets/img/Rectangle 8.png";
+import plus from "../../../assets/img/Plus.png";
+import menu from "../../../assets/img/Menu.png";
+import profileMenu from "../../../assets/img/Profile menu.png";
+import plusMessage from "../../../assets/img/Plus.png";
+import sticker from "../../../assets/img/Vector (3).png";
+import pics from "../../../assets/img/Group 181.png";
+
+import {
+  Container,
+  Form,
+  Row,
+  Col,
+  Card,
+  Badge,
+  Dropdown,
+} from "react-bootstrap";
 
 function Chat(props) {
-  const username = localStorage.getItem("token");
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
-  const [room, setRoom] = useState({ new: "", old: "" });
+  const [click, setClick] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [data, setData] = useState({});
 
   useEffect(() => {
-    if (props.socket) {
-      props.socket.on("chatMessage", (dataMessage) => {
-        setMessages([...messages, dataMessage]);
-      });
-    }
-  }, [props.socket, messages]);
+    const id = localStorage.getItem("userId");
+    getDataById(id);
+  }, []);
 
-  const handleSelectRoom = (event) => {
-    if (room.old) {
-      console.log("sudah pernah masuk ke room " + room.old);
-      console.log("dan akan masuk ke room " + event.target.value);
-    } else {
-      console.log("belum pernah masuk ke ruang manapun");
-      console.log("dan akan masuk ke room " + event.target.value);
-    }
-
-    // console.log(event.target.value);
-    props.socket.emit("joinRoom", {
-      room: event.target.value,
-      oldRoom: room.old,
-      username,
-    })
-    setRoom({ ...room, new: event.target.value, old: event.target.value });
+  const getDataById = (id) => {
+    props.getDataId(id).then((res) => {
+      setData(res.action.payload.data.data[0]);
+    });
   };
+  // const username = localStorage.getItem("token");
+  // const [message, setMessage] = useState("");
+  // const [messages, setMessages] = useState([]);
+  // const [room, setRoom] = useState({ new: "", old: "" });
+  // // const [oldRoom, setoldRoom] = useState("");
 
-  const handleChangeText = (event) => {
-    setMessage(event.target.value);
+  // useEffect(() => {
+  //   if (props.socket) {
+  //     props.socket.on("chatMessage", (dataMessage) => {
+  //       setMessages([...messages, dataMessage]);
+  //     });
+  //   }
+  // }, [props.socket, messages]);
+
+  // const handleSelectRoom = (event) => {
+  //   // if (room.old) {
+  //   //   console.log("sudah pernah masuk ke room " + room.old);
+  //   //   console.log("dan akan masuk ke room " + event.target.value);
+  //   // } else {
+  //   //   console.log("belum pernah masuk ke ruang manapun");
+  //   //   console.log("dan akan masuk ke room " + event.target.value);
+  //   // }
+
+  //   // console.log(event.target.value);
+  //   props.socket.emit("joinRoom", {
+  //     room: event.target.value,
+  //     oldRoom: room.old,
+  //     username,
+  //   });
+  //   setRoom({ ...room, new: event.target.value, old: event.target.value });
+  // };
+
+  // const handleChangeText = (event) => {
+  //   setMessage(event.target.value);
+  // };
+
+  // const handleSendMessage = () => {
+  //   console.log("Username :", username);
+  //   console.log("Room :", room);
+  //   console.log("Send Message :", message);
+  //   // const setData = {
+  //   //   username,
+  //   //   message,
+  //   // };
+  //   // props.socket.emit("globalMessage", setData);
+  //   // props.socket.emit("privateMessage", setData);
+  //   // props.socket.emit("broadcastMessage", setData);
+
+  //   const setData = {
+  //     room: room.new,
+  //     username,
+  //     message,
+  //   };
+  //   props.socket.emit("roomMessage", setData);
+  //   setMessage("");
+  // };
+  const handleRoom = () => {
+    setClick(true);
   };
-
-  const handleSendMessage = () => {
-    console.log("User Name :", username);
-    console.log("Room :", room);
-    console.log("Send Message :", message);
-    // const setData = {
-    //   username,
-    //   message
-    // };
-    // // props.socket.emit("globalMessage", setData)
-    // // props.socket.emit("privatMessage", setData)
-    // props.socket.emit("broadcastMessage", setData)
-    // =====================================================
-    const setData = {
-      room: room.new,
-      username,
-      message,
-    };
-    // menjalankan socket io
-    props.socket.emit("roomMessage", setData)
-    // menjalankan proses axios post data ke table chat
-    setMessage("");
-    // // props.socket.emit("globalMessage", setData)
-    // // props.socket.emit("privatMessage", setData)
-    // props.socket.emit("broadcastMessage", setData)
-    setMessage("");
-
+  const handleHome = () => {
+    setClick(false);
   };
-
+  const handleEdit = () => {
+    setIsEdit(true);
+  };
+  const handleBack = () => {
+    setIsEdit(false);
+  };
+  console.log(data);
   return (
-    <Container className="text-center">
-      <Navbar />
-      <h1>Chat App</h1>
-      <hr />
-      <Form>
-        <Form.Group>
-          <Form.Control
-            as="select"
-            size="lg"
-            onChange={(event) => handleSelectRoom(event)}
-          >
-            <option value="">Pilih Room ...</option>
-            <option value="html">HTML</option>
-            <option value="css">CSS</option>
-            <option value="js">JS</option>
-          </Form.Control>
-        </Form.Group>
-      </Form>
-      <hr />
+    <Container fluid>
       <Row>
-        <Col sm={2}>
-          <div className={styles.chat}>
-            <div className={styles.chatWindow}>
-              <InputGroup className="mb-3">
-                <InputGroup.Prepend>
-                  <Image src={gambar}></Image>
-                </InputGroup.Prepend>
-                <FormControl
-                  placeholder="Username"
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
+        {isEdit ? (
+          <CardEdit edit={isEdit} back={handleBack} data={data} />
+        ) : (
+          <Col sm={3} className={styles.mainCol}>
+            <Card className={styles.mainCard}>
+              <Row>
+                <Col>
+                  <h1 className={styles.title} onClick={handleHome}>
+                    Telegram
+                  </h1>
+                </Col>
+                <Col>
+                  <Dropdown drop="left">
+                    <Dropdown.Toggle className={styles.drop}>
+                      <img alt="" src={menu} />
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu className={styles.menuDrop}>
+                      <Dropdown.Item className={styles.item}>
+                        Settings
+                      </Dropdown.Item>
+
+                      <Dropdown.Item className={styles.item}>
+                        Contacts
+                      </Dropdown.Item>
+
+                      <Dropdown.Item className={styles.item}>
+                        Invite Friends
+                      </Dropdown.Item>
+
+                      <Dropdown.Item className={styles.item}>
+                        Telegram FAQ
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Col>
+              </Row>
+
+              <Card className={styles.cardProfile} onClick={handleEdit}>
+                <Card.Img
+                  src={sample}
+                  variant="top"
+                  className={styles.profileImg}
                 />
-              </InputGroup>
-              <p className={styles.room}>User 1</p>
-              <hr />
-              <p className={styles.room}>User 2</p>
-              <hr />
-            </div>
-          </div>
-        </Col>
-        <Col sm={10}>
-          <div className={styles.chat}>
-            <div className={styles.chatWindow}>
-              <div className={styles.output}>
-                {messages.map((item, index) => (
-                  <p key={index}>
-                    <strong>{item.username} : </strong>
-                    {item.message}
-                  </p>
-                ))}
+                <Card.Body>
+                  <Card.Text className={styles.profileName}>
+                    {data.akun_name}
+                  </Card.Text>
+                  <Card.Text className={styles.profileId}>
+                    {data.akun_add_id}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              <Card className={styles.cardContact}>
+                <Row>
+                  <Col xs={10}>
+                    <Form>
+                      <Form.Group>
+                        <Form.Control
+                          type="text"
+                          placeholder="Type your message..."
+                          className={styles.searchMessage}
+                        />
+                      </Form.Group>
+                    </Form>
+                  </Col>
+                  <Col xs={2}>
+                    <img alt="" src={plus} className={styles.plus} />
+                  </Col>
+                </Row>
+              </Card>
+            </Card>
+            <Card className={styles.contactList} onClick={handleRoom}>
+              <Row>
+                <Col>
+                  <Card.Img
+                    variant="left"
+                    src={sample}
+                    className={styles.ppImg}
+                  />
+                </Col>
+                <Col xs={6}>
+                  <Card.Text className={styles.name}>Theresa Webb</Card.Text>
+                  <Card.Text className={styles.bio}>
+                    Why did you do that?
+                  </Card.Text>
+                </Col>
+                <Col>
+                  <p className={styles.time}>15:20</p>
+                  <Badge className={styles.notif}>2</Badge>
+                </Col>
+              </Row>
+            </Card>
+            <Card className={styles.contactList} onClick={handleRoom}>
+              <Row>
+                <Col>
+                  <Card.Img
+                    variant="left"
+                    src={sample}
+                    className={styles.ppImg}
+                  />
+                </Col>
+                <Col xs={6}>
+                  <Card.Text className={styles.name}>Theresa Webb</Card.Text>
+                  <Card.Text className={styles.bio}>
+                    Why did you do that?
+                  </Card.Text>
+                </Col>
+                <Col>
+                  <p className={styles.time}>15:20</p>
+                  <Badge className={styles.notif}>2</Badge>
+                </Col>
+              </Row>
+            </Card>
+            <Card className={styles.contactList} onClick={handleRoom}>
+              <Row>
+                <Col>
+                  <Card.Img
+                    variant="left"
+                    src={sample}
+                    className={styles.ppImg}
+                  />
+                </Col>
+                <Col xs={6}>
+                  <Card.Text className={styles.name}>Theresa Webb</Card.Text>
+                  <Card.Text className={styles.bio}>
+                    Why did you do that?
+                  </Card.Text>
+                </Col>
+                <Col>
+                  <p className={styles.time}>15:20</p>
+                  <Badge className={styles.notif}>2</Badge>
+                </Col>
+              </Row>
+            </Card>
+            <Card className={styles.contactList} onClick={handleRoom}>
+              <Row>
+                <Col>
+                  <Card.Img
+                    variant="left"
+                    src={sample}
+                    className={styles.ppImg}
+                  />
+                </Col>
+                <Col xs={6}>
+                  <Card.Text className={styles.name}>Theresa Webb</Card.Text>
+                  <Card.Text className={styles.bio}>
+                    Why did you do that?
+                  </Card.Text>
+                </Col>
+                <Col>
+                  <p className={styles.time}>15:20</p>
+                  <Badge className={styles.notif}>2</Badge>
+                </Col>
+              </Row>
+            </Card>
+            <Card className={styles.contactList} onClick={handleRoom}>
+              <Row>
+                <Col>
+                  <Card.Img
+                    variant="left"
+                    src={sample}
+                    className={styles.ppImg}
+                  />
+                </Col>
+                <Col xs={6}>
+                  <Card.Text className={styles.name}>Theresa Webb</Card.Text>
+                  <Card.Text className={styles.bio}>
+                    Why did you do that?
+                  </Card.Text>
+                </Col>
+                <Col>
+                  <p className={styles.time}>15:20</p>
+                  <Badge className={styles.notif}>2</Badge>
+                </Col>
+              </Row>
+            </Card>
+            <Card className={styles.contactList} onClick={handleRoom}>
+              <Row>
+                <Col>
+                  <Card.Img
+                    variant="left"
+                    src={sample}
+                    className={styles.ppImg}
+                  />
+                </Col>
+                <Col xs={6}>
+                  <Card.Text className={styles.name}>Theresa Webb</Card.Text>
+                  <Card.Text className={styles.bio}>
+                    Why did you do that?
+                  </Card.Text>
+                </Col>
+                <Col>
+                  <p className={styles.time}>15:20</p>
+                  <Badge className={styles.notif}>2</Badge>
+                </Col>
+              </Row>
+            </Card>
+            <Card className={styles.contactList} onClick={handleRoom}>
+              <Row>
+                <Col>
+                  <Card.Img
+                    variant="left"
+                    src={sample}
+                    className={styles.ppImg}
+                  />
+                </Col>
+                <Col xs={6}>
+                  <Card.Text className={styles.name}>Theresa Webb</Card.Text>
+                  <Card.Text className={styles.bio}>
+                    Why did you do that?
+                  </Card.Text>
+                </Col>
+                <Col>
+                  <p className={styles.time}>15:20</p>
+                  <Badge className={styles.notif}>2</Badge>
+                </Col>
+              </Row>
+            </Card>
+            <Card className={styles.contactList} onClick={handleRoom}>
+              <Row>
+                <Col>
+                  <Card.Img
+                    variant="left"
+                    src={sample}
+                    className={styles.ppImg}
+                  />
+                </Col>
+                <Col xs={6}>
+                  <Card.Text className={styles.name}>Theresa Webb</Card.Text>
+                  <Card.Text className={styles.bio}>
+                    Why did you do that?
+                  </Card.Text>
+                </Col>
+                <Col>
+                  <p className={styles.time}>15:20</p>
+                  <Badge className={styles.notif}>2</Badge>
+                </Col>
+              </Row>
+            </Card>
+            <Card className={styles.contactList} onClick={handleRoom}>
+              <Row>
+                <Col>
+                  <Card.Img
+                    variant="left"
+                    src={sample}
+                    className={styles.ppImg}
+                  />
+                </Col>
+                <Col xs={6}>
+                  <Card.Text className={styles.name}>Theresa Webb</Card.Text>
+                  <Card.Text className={styles.bio}>
+                    Why did you do that?
+                  </Card.Text>
+                </Col>
+                <Col>
+                  <p className={styles.time}>15:20</p>
+                  <Badge className={styles.notif}>2</Badge>
+                </Col>
+              </Row>
+            </Card>
+            <Card className={styles.contactList} onClick={handleRoom}>
+              <Row>
+                <Col>
+                  <Card.Img
+                    variant="left"
+                    src={sample}
+                    className={styles.ppImg}
+                  />
+                </Col>
+                <Col xs={6}>
+                  <Card.Text className={styles.name}>Theresa Webb</Card.Text>
+                  <Card.Text className={styles.bio}>
+                    Why did you do that?
+                  </Card.Text>
+                </Col>
+                <Col>
+                  <p className={styles.time}>15:20</p>
+                  <Badge className={styles.notif}>2</Badge>
+                </Col>
+              </Row>
+            </Card>
+          </Col>
+        )}
+
+        <Col sm={9} className={click ? styles.chatRoom : styles.mainColChat}>
+          {click ? (
+            <>
+              <Card className={styles.cardRoom}>
+                <Row>
+                  <Col xs={1} className={styles.handleImage}>
+                    <Card.Img
+                      variant="left"
+                      src={sample}
+                      className={styles.roomImg}
+                    />
+                  </Col>
+                  <Col xs={10} className={styles.profile}>
+                    <Card.Text className={styles.nameFriend}>
+                      Mother ❤
+                    </Card.Text>
+                    <Card.Text className={styles.statusFriend}>
+                      Online
+                    </Card.Text>
+                  </Col>
+                  <Col xs={1}>
+                    <img
+                      alt=""
+                      src={profileMenu}
+                      className={styles.imgMenuProfile}
+                    />
+                  </Col>
+                </Row>
+              </Card>
+              <div className={styles.chatWindow}>
+                <h1>HAI</h1>
+                <h1>HAI</h1>
+                <h1>HAI</h1>
+                <h1>HAI</h1>
               </div>
-            </div>
-            <input
-              className={styles.inputMessage}
-              onChange={(event) => handleChangeText(event)}
-              type="text"
-              value={message}
-              placeholder="Message"
-            />
-            <button onClick={handleSendMessage} className={styles.btnSubmit}>
-              Send
-            </button>
-          </div>
+              <Card className={styles.cardMessage}>
+                <Row>
+                  <Col xs={8}>
+                    <Form>
+                      <Form.Group>
+                        <Form.Control
+                          type="text"
+                          placeholder="Type your message..."
+                          className={styles.formMessage}
+                        />
+                      </Form.Group>
+                    </Form>
+                  </Col>
+                  <Col xs={1}>
+                    {" "}
+                    <img
+                      alt=""
+                      src={plusMessage}
+                      className={styles.plusMessage}
+                    />
+                  </Col>
+                  <Col xs={1}>
+                    <img alt="" src={sticker} className={styles.sticker} />
+                  </Col>
+                  <Col xs={1}>
+                    <img alt="" src={pics} className={styles.pics} />
+                  </Col>
+                </Row>
+              </Card>
+            </>
+          ) : (
+            <h1 className={styles.mainTextChat}>
+              Please select a chat to start messaging
+            </h1>
+          )}
         </Col>
       </Row>
     </Container>
   );
 }
 
-export default Chat;
+const mapStateToProps = (state) => ({
+  user: state.akun,
+  auth: state.auth,
+});
+
+const mapDispatchToProps = { getDataId };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);
