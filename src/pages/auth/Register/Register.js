@@ -97,7 +97,7 @@ function Register(props) {
                   <Form.Label className={styles.everyLabel}>Email</Form.Label>
                   <Form.Control
                     type="email"
-                    placeholder="telegram@mail.com"
+                    placeholder="Your Mail"
                     value={form.userEmail}
                     name="userEmail"
                     onChange={(event) => changeText(event)}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { getDataId, updatePhone } from "../../../redux/action/user";
 import { getDataIdRoom, deleteRoom } from "../../../redux/action/room";
-import { getDataChatId, postData } from "../../../redux/action/chat";
+import { getDataChatId, postDataChat } from "../../../redux/action/chat";
 
 import CardEdit from "../../../components/EditProfile/editProfile";
 import InviteFriend from "../../../components/InviteFriend/inviteFriend";
@@ -14,6 +14,9 @@ import plus from "../../../assets/img/Plus.png";
 import send from "../../../assets/img/back.png";
 import menu from "../../../assets/img/Menu.png";
 import profileMenu from "../../../assets/img/Profile menu.png";
+import plusMessage from "../../../assets/img/Plus.png";
+import sticker from "../../../assets/img/Vector (3).png";
+import pics from "../../../assets/img/Group 181.png";
 import back from "../../../assets/img/back.png";
 
 import {
@@ -28,8 +31,6 @@ import {
 } from "react-bootstrap";
 
 function Chat(props) {
-  const [typing, setTyping] = useState({ typing: false });
-  const [clickRoom, setClickRoom] = useState(false);
   const [click, setClick] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [data, setData] = useState({});
@@ -39,9 +40,15 @@ function Chat(props) {
   const [addRoom, setAddRoom] = useState(false);
   const [contact, setContact] = useState(false);
   const [dataFriend, setDataFriend] = useState({});
-  const [userOnline, setUserOnline] = useState([]);
-  const [isProfileFriend, setIsProfileFriend] = useState(false);
   const [idRoom, setIdRoom] = useState("");
+  const [clickRoom, setClickRoom] = useState(false);
+  const [isProfileFriend, setIsProfileFriend] = useState(false);
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [room, setRoom] = useState({ new: "", old: "" });
+  // const [oldRoom, setoldRoom] = useState("");
+  const [selectRoom, setSelectRoom] = useState("");
+  const [userOnline, setUserOnline] = useState([]);
 
   const [notif, setNotif] = useState({ show: false });
 
@@ -68,14 +75,6 @@ function Chat(props) {
       setDataRoom(res.action.payload.data.data);
     });
   };
-
-  // const username = localStorage.getItem("userName");
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
-  const [room, setRoom] = useState({ new: "", old: "" });
-  // const [oldRoom, setoldRoom] = useState("");
-  const [selectRoom, setSelectRoom] = useState("");
-
   useEffect(() => {
     if (props.socket) {
       props.socket.on("chatMessage", (dataMessage) => {
@@ -105,76 +104,36 @@ function Chat(props) {
     });
 
     props.socket.on("notif-message", (data) => {
-      console.log('data notif', data);
       setNotif(data);
     });
-    props.socket.on("typing", (data) => {
-      // console.log(data);
-      setTyping(data);
-    });
   };
-
   const handleChangeText = (event) => {
     setMessage(event.target.value);
-    props.socket.emit("typing", {
-      userName: username,
-      room: room.new,
-      typing: true,
-    });
   };
-  const handleStopTyping = () => {
-    setTimeout(() => {
-      props.socket.emit("typing", {
-        userName: username,
-        room: selectRoom,
-        typing: false,
-      });
-    }, 2000);
-  };
-  const handleSendMessage = (data) => {
-    // console.log(props);
-    // console.log(data);
-    // console.log("Username :", data.user_name);
-    // console.log("Room :", selectRoom);
-    // console.log("Send Message :", message);
-    // const setData = {
-    //   username,
-    //   message,
-    // };
-    // props.socket.emit("globalMessage", setData);
-    // props.socket.emit("privateMessage", setData);
-    // props.socket.emit("broadcastMessage", setData);
 
+  const handleSendMessage = (data) => {
     const setData = {
       userid: parseInt(userid),
       friendId: data,
       room: selectRoom,
       userName: username,
+      username: data.user_name,
       show: true,
       message,
     };
     const setDataChat = {
       userId: localStorage.getItem("userId"),
-      friendId: dataFriend.akun_id,
+      friendId: data,
       roomChat: selectRoom,
       Message: message,
     };
-    console.log("asdasdda", setData);
+    console.log(selectRoom);
     props.socket.emit("notif-message", setData);
-    props.socket.emit("typing", {
-      userName: username,
-      room: room.new,
-      typing: false,
-    });
-    // props.socket.emit("roomMessage", setData);
-    props.postData(setDataChat).then((res) => {
+    props.postDataChat(setDataChat).then((res) => {
       props.socket.emit("roomMessage", setData);
     });
     setMessage("");
   };
-  // const handleSetting = () => {
-  //   props.history.push("../../../components/EditProfile/editProfile.js");
-  // };
   const handleAddRoom = () => {
     setAddRoom(true);
   };
@@ -183,20 +142,17 @@ function Chat(props) {
   };
   const handleRoom = (item) => {
     props.getDataChatId(item.room_chat).then((res) => {
-      // console.log(res);
-      // console.log(res.action.payload.data.data)
       setMessages(res.action.payload.data.data);
     });
-    props.getDataId(item.friend_id).then((res) => {
-      // console.log(res);
-      // console.log("ssaassad", res.action.payload)
+    props.getDataId(item.user_id).then((res) => {
+      console.log(res);
       setDataFriend(res.action.payload.data.data[0]);
     });
-    const { akun_name } = data;
+    const { user_name } = data;
     props.socket.emit("joinRoom", {
       room: item.room_chat,
       oldRoom: room.old,
-      akun_name,
+      user_name,
     });
     setSelectRoom(item.room_chat);
     setRoom({ ...room, new: item.room_chat, old: item.room_chat });
@@ -229,9 +185,9 @@ function Chat(props) {
   const handleCloseContact = () => {
     setContact(false);
   };
-
   const handleDeleteRoom = () => {
     const id = idRoom.room_chat_id;
+    console.log(idRoom);
     props.deleteRoom(id).then((res) => {
       window.confirm("Anda Yakin menghapus Chat ini ?");
       getDataRoomId(localStorage.getItem("userId"));
@@ -251,11 +207,12 @@ function Chat(props) {
   userOnline.map((item) => {
     return Users.push(parseInt(item));
   });
-  // console.log(userOnline);
-  // // console.log(dataFriend.akun_id);
-  // console.log(notif);
+
+  console.log(Users);
+  console.log(dataFriend.user_id);
+  console.log(notif);
   return (
-    <Container fluid className={styles.bg}>
+    <Container fluid>
       {click && (
         <div style={{ position: "absolute", top: 20, right: 20 }}>
           <Toast
@@ -265,14 +222,30 @@ function Chat(props) {
             autohide
           >
             <Toast.Header closeButton={false}>
-              <strong className="me-auto">Telegram App ({notif.userName})</strong>
+              <strong className="me-auto">
+                TeleDemy App ({notif.userName})
+              </strong>
               <small className="text-muted">just now</small>
             </Toast.Header>
             <Toast.Body>{notif.message}</Toast.Body>
           </Toast>
         </div>
       )}
-      hoihoihoihohiohihoi
+      <div style={{ position: "absolute", top: 20, right: 20 }}>
+        <Toast
+          onClose={() => setNotif({ ...notif, show: false })}
+          show={notif.show}
+          delay={3000}
+          autohide
+        >
+          <Toast.Header closeButton={false}>
+            <strong className="me-auto">TeleDemy App ({notif.userName})</strong>
+            <small className="text-muted">just now</small>
+          </Toast.Header>
+          <Toast.Body>{notif.message}</Toast.Body>
+        </Toast>
+      </div>
+
       {invite && (
         <InviteFriend
           show={invite}
@@ -283,9 +256,11 @@ function Chat(props) {
       )}
       {isUpdatePhone && (
         <Modal show={isUpdatePhone} onHide={handleClose}>
-          <Modal.Title className={styles.modalPhone}>
-            Update Phone Number
-          </Modal.Title>
+          <Modal.Header closeButton>
+            <Modal.Title className={styles.modalPhone}>
+              Update Phone Number
+            </Modal.Title>
+          </Modal.Header>
 
           <Modal.Body>
             <p className={styles.textModalPhone}>
@@ -302,14 +277,15 @@ function Chat(props) {
             data={data}
             isUpdatePhone={setisUpdatePhone}
             handleGetId={getDataById}
+            socket={props.socket}
           />
         ) : (
-          <Col sm={3} className={styles.mainCol}>
+          <Col sm={3} className={click ? styles.mainCol1 : styles.mainCol}>
             <Card className={styles.mainCard}>
               <Row>
                 <Col>
                   <h1 className={styles.title} onClick={handleHome}>
-                    MuiChat,
+                    Teledemy
                   </h1>
                 </Col>
                 <Col>
@@ -348,7 +324,7 @@ function Chat(props) {
                       </Dropdown.Item>
 
                       <Dropdown.Item className={styles.item}>
-                        MuiChat FAQ
+                        Telegram FAQ
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
@@ -357,16 +333,16 @@ function Chat(props) {
 
               <Card className={styles.cardProfile} onClick={handleEdit}>
                 <Card.Img
-                  src={`http://localhost:3009/backend3/api/${data.akun_image}`}
+                  src={`https://teledemyapp.herokuapp.com/backend3/api/${data.image_user}`}
                   variant="top"
                   className={styles.profileImg}
                 />
                 <Card.Body>
                   <Card.Text className={styles.profileName}>
-                    {data.akun_name}
+                    {data.user_name}
                   </Card.Text>
                   <Card.Text className={styles.profileId}>
-                    @{data.akun_add_id}
+                    @{data.user_add_id}
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -377,7 +353,7 @@ function Chat(props) {
                       <Form.Group>
                         <Form.Control
                           type="text"
-                          placeholder="Type your message.d.."
+                          placeholder="Type your message..."
                           className={styles.searchMessage}
                         />
                       </Form.Group>
@@ -395,8 +371,8 @@ function Chat(props) {
                         show={addRoom}
                         close={handleCloseAddRoom}
                         data={data}
-                        setClickRoom={setClickRoom}
                         handleGetData={getDataRoomId}
+                        setClickRoom={setClickRoom}
                         clickRoom={clickRoom}
                       />
                     )}
@@ -406,7 +382,6 @@ function Chat(props) {
             </Card>
 
             {dataRoom.map((item, index) => {
-              // console.log(item);
               return (
                 <>
                   {" "}
@@ -419,21 +394,19 @@ function Chat(props) {
                       <Col>
                         <Card.Img
                           variant="left"
-                          src={`http://localhost:3009/backend3/api/${item.akun_image}`}
+                          src={`https://teledemyapp.herokuapp.com/backend3/api/${item.image_user}`}
                           className={styles.ppImg}
                         />
                       </Col>
                       <Col xs={6}>
                         <Card.Text className={styles.name}>
-                          {item.akun_name}
+                          {item.user_name}
                         </Card.Text>
                         <Card.Text className={styles.bio}>
-                          {item.akun_bio}
+                          {item.user_bio}
                         </Card.Text>
                       </Col>
-                      <Col>
-                        <p className={styles.time}>15:20</p>
-                      </Col>
+                      <Col></Col>
                     </Row>
                   </Card>
                 </>
@@ -449,6 +422,23 @@ function Chat(props) {
           {click ? (
             <>
               <Card className={styles.cardRoom}>
+                <div style={{ position: "absolute", top: 20, right: 20 }}>
+                  <Toast
+                    onClose={() => setNotif({ ...notif, show: false })}
+                    show={notif.show}
+                    delay={3000}
+                    autohide
+                  >
+                    <Toast.Header closeButton={false}>
+                      <strong className="me-auto">
+                        TeleDemy App ({notif.userName})
+                      </strong>
+                      <small className="text-muted">just now</small>
+                    </Toast.Header>
+                    <Toast.Body>{notif.message}</Toast.Body>
+                  </Toast>
+                </div>
+
                 <Row>
                   <Col
                     xs={isProfileFriend ? 2 : 3}
@@ -456,17 +446,17 @@ function Chat(props) {
                   >
                     <Card.Img
                       variant="left"
-                      src={`http://localhost:3009/backend3/api/${dataFriend.akun_image}`}
+                      src={`https://teledemyapp.herokuapp.com/backend3/api/${dataFriend.image_user}`}
                       className={styles.roomImg}
                       onClick={handleHome}
                     />
                   </Col>
                   <Col xs={isProfileFriend ? 7 : 7} className={styles.profile}>
                     <Card.Text className={styles.nameFriend}>
-                      {dataFriend.akun_name}
+                      {dataFriend.user_name}
                     </Card.Text>
                     <Card.Text className={styles.statusFriend}>
-                      {Users.includes(dataFriend.akun_id)
+                      {Users.includes(dataFriend.user_id)
                         ? "Online"
                         : "Offline"}
                     </Card.Text>
@@ -492,7 +482,7 @@ function Chat(props) {
                           className={styles.itemRoom}
                           onClick={handleDeleteRoom}
                         >
-                          Delete Chat
+                          Delete Room
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
@@ -500,67 +490,38 @@ function Chat(props) {
                 </Row>
               </Card>
               <div className={styles.chatWindow}>
-                <br />
-                <br />
-                <Row xs={1} className={styles.rowChat}>
-                  {messages.map((itema, index1) => {
-                    // console.log(itema);
-                    // console.log(data.akun_id);
+                <Row className={styles.rowChat}>
+                  {messages.map((item, index) => {
                     return (
                       <>
-                        <Col
-                          key={index1}
-                          className={`d-flex gy-4 
-                          ${itema.sender_id === data.akun_id ||
-                              itema.senderId === data.akun_id
-                              ? "justify-content-end"
-                              : "justify-content-start"
-                            }`}
-                        >
-                          <div
-                            className={`d-flex align-items-center ${styles.chatTxtContainer
-                              } ${itema.sender_id === data.akun_id ||
-                                itema.senderId === data.akun_id
-                                ? styles.receiver
-                                : styles.sender
-                              }`}
-                          >
-                            <p className="m-0">{itema.message}</p>
-                          </div>
+                        <Col xs={2} className={styles.colChat}>
+                          <img
+                            alt=""
+                            variant="left"
+                            src={`https://teledemyapp.herokuapp.com/backend3/api/${dataFriend.image_user}`}
+                            className={styles.messageImg}
+                          />
+                        </Col>
+                        <Col xs={10} className={styles.colChat}>
+                          <p className={styles.message}>{item.message}</p>
                         </Col>
                       </>
                     );
                   })}
-                  {typing.typing && (
-                    <Col className="justify-content-start">
-                      <div
-                        className={`d-flex align-items-center mt-2 ${styles.chatTxtContainer} ${styles.sender}`}
-                      >
-                        <p>
-                          <em>{typing.userName} is typing a message...</em>
-                        </p>
-                      </div>
-                    </Col>
-                  )}
                 </Row>
               </div>
               <Card className={styles.cardMessage}>
                 <Row className={styles.rowMessage}>
                   <Col xs={message ? 10 : 8}>
-                    <Form>
-                      <Form.Group>
-                        <Form.Control
-                          type="text"
-                          placeholder="Type your message..."
-                          className={styles.formMessage}
-                          value={message}
-                          onChange={(event) => {
-                            handleChangeText(event);
-                            handleStopTyping();
-                          }}
-                        />
-                      </Form.Group>
-                    </Form>
+                    <Form.Group>
+                      <Form.Control
+                        type="text"
+                        placeholder="Type your message..."
+                        className={styles.formMessage}
+                        value={message}
+                        onChange={(event) => handleChangeText(event)}
+                      />
+                    </Form.Group>
                   </Col>
                   {message ? (
                     <Col>
@@ -569,11 +530,25 @@ function Chat(props) {
                         alt=""
                         src={send}
                         className={styles.sendMessage}
-                        onClick={() => handleSendMessage(data.akun_id)}
+                        onClick={() => handleSendMessage(dataFriend.user_id)}
                       />
                     </Col>
                   ) : (
                     <>
+                      <Col xs={1}>
+                        {" "}
+                        <img
+                          alt=""
+                          src={plusMessage}
+                          className={styles.plusMessage}
+                        />
+                      </Col>
+                      <Col xs={1}>
+                        <img alt="" src={sticker} className={styles.sticker} />
+                      </Col>
+                      <Col xs={1}>
+                        <img alt="" src={pics} className={styles.pics} />
+                      </Col>
                     </>
                   )}
                 </Row>
@@ -581,7 +556,7 @@ function Chat(props) {
             </>
           ) : (
             <h1 className={styles.mainTextChat}>
-              Welcome to MuiChat :)
+              Please select a chat to start messaging
             </h1>
           )}
         </Col>
@@ -599,29 +574,34 @@ function Chat(props) {
                 </Col>
                 <Col xs={8}>
                   <Card.Text className={styles.profileId}>
-                    {dataFriend.akun_add_id}
+                    {dataFriend.user_add_id}
                   </Card.Text>
                 </Col>
               </Row>
 
               <Card className={styles.cardProfile}>
                 <Card.Img
-                  src={`http://localhost:3009/backend3/api/${dataFriend.akun_image}`}
+                  src={`https://teledemyapp.herokuapp.com/backend3/api/${dataFriend.image_user}`}
                   variant="top"
                   className={styles.profileImg}
                 />
 
                 <Card.Text className={styles.profileId1}>
-                  {dataFriend.akun_name}
+                  {dataFriend.user_name}
                 </Card.Text>
                 <Card.Text className={styles.profileId2}>Online</Card.Text>
 
                 <Card.Text className={styles.phone}>Phone Number</Card.Text>
 
                 <Card.Text className={styles.textId}>
-                  {dataFriend.akun_phone}
+                  {dataFriend.user_phone}
                 </Card.Text>
               </Card>
+              <Row className={styles.rowBottom}>
+                <Col className={styles.colBottom}>Location</Col>
+                <Col className={styles.colBottom}>Image</Col>
+                <Col className={styles.colBottom}>Document</Col>
+              </Row>
             </Card>
           </Col>
         )}
@@ -642,7 +622,7 @@ const mapDispatchToProps = {
   updatePhone,
   getDataIdRoom,
   getDataChatId,
-  postData,
+  postDataChat,
   deleteRoom,
 };
 

@@ -22,8 +22,10 @@ function Login(props) {
       //       console.log(this.props.auth.data.akun_name)
       const token = res.action.payload.data.data.token;
       const userId = res.action.payload.data.data.akun_id;
+      const userName = res.action.payload.data.data.akun_name;
       localStorage.setItem("token", token);
       localStorage.setItem("userId", userId);
+      localStorage.setItem("userName", userName);
       props.history.push("/chat");
     });
   };
@@ -60,7 +62,7 @@ function Login(props) {
                 <Form.Label className={styles.everyLabel}>Email</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="telegram@mail.com"
+                  placeholder="Your Mail"
                   name="userEmail"
                   value={form.userEmail}
                   onChange={(event) => changeText(event)}

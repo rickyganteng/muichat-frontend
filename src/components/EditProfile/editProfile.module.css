@@ -1,5 +1,8 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap"); */
 
+input[type="file"] {
+  display: none;
+}
 .mainCard {
   padding: 43px 30px;
   border: none;
@@ -11,9 +14,10 @@
   border: none;
 }
 .profileId {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 28px;
 
   color: #7e98df;
@@ -21,11 +25,14 @@
 .profileImg {
   width: 82px;
   height: 82px;
-  margin: 0 auto;
+  margin-left: 85px;
   margin-top: 25px;
   margin-bottom: 25px;
+  cursor: pointer;
+  border-radius: 100%;
 }
 .profileName {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 22px;
@@ -38,7 +45,16 @@
 .imgBack {
   cursor: pointer;
 }
+.imgBackUpdate {
+  transform: rotate(270deg);
+  cursor: pointer;
+}
+.imgResetBack {
+  transform: rotate(45deg);
+  cursor: pointer;
+}
 .profileId1 {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -48,14 +64,17 @@
   text-align: center;
 }
 .title {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 19px;
   line-height: 23px;
   color: #232323;
   margin-bottom: 18px;
+  margin-top: 35px;
 }
 .phone {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -65,6 +84,7 @@
   margin-bottom: 7.5px;
 }
 .changePhone {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -76,6 +96,7 @@
   cursor: pointer;
 }
 .textId {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -84,6 +105,7 @@
   margin-bottom: 8px;
 }
 .userName {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -93,6 +115,7 @@
   margin-bottom: 52px;
 }
 .changePass {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 17px;
@@ -104,6 +127,7 @@
   cursor: pointer;
 }
 .modalPhone {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 19px;
@@ -115,6 +139,7 @@
 }
 .btn {
   width: 100%;
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 19px;
@@ -125,4 +150,78 @@
   margin-bottom: 18px;
   text-align: center;
   margin-top: 30px;
+}
+.alertPhone {
+  width: 100%;
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 23px;
+  margin-bottom: 18px;
+  text-align: center;
+  margin-top: 30px;
+}
+.controlTextId {
+  border: none;
+  padding: 0px !important;
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #232323;
+  margin-bottom: 8px;
+}
+.controlTextId:focus {
+  box-shadow: none;
+}
+.controlTextIdName {
+  border: none;
+  padding: 0px !important;
+  text-align: center;
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #232323;
+  margin-bottom: 8px;
+  border-bottom: 1px solid black;
+  border-radius: 0px;
+}
+.controlTextIdName:focus {
+  box-shadow: none;
+}
+.controlTextIdAddId {
+  border: none;
+  padding: 0px !important;
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #232323;
+  margin-bottom: 8px;
+  border-bottom: 1px solid black;
+  border-radius: 0px;
+}
+.controlTextIdAddId:focus {
+  box-shadow: none;
+}
+.controlTextBio {
+  border: none;
+  padding: 0px !important;
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #232323;
+  margin-bottom: 8px;
+  border-bottom: 1px solid black;
+  border-radius: 0px;
+}
+.controlTextBio:focus {
+  box-shadow: none;
 }

@@ -1,0 +1,82 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap"); */
+
+.title {
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 23px;
+  color: #232323;
+  text-align: center;
+  margin-bottom: 18px;
+  margin-top: 35px;
+}
+.control {
+  height: 50px;
+  border-radius: 10px;
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
+  color: #232323;
+  border: none;
+}
+.control:focus {
+  box-shadow: none;
+}
+.control::placeholder {
+  border-bottom: 1px solid black;
+}
+.btn {
+  margin-top: 30px;
+  background-color: #7e98df;
+  height: 50px;
+  width: 100%;
+  border: #7e98df;
+  border-radius: 10px;
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+}
+.imgFriend {
+  width: 82px;
+  height: 82px;
+  border-radius: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+.name {
+  text-align: center !important;
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 23px;
+  margin-top: 10px;
+}
+.email {
+  text-align: center !important;
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  margin-bottom: 10px;
+}
+.bio {
+  text-align: center !important;
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 23px;
+}
+.cardFriend {
+  padding: 5px;
+  margin: 20px;
+  border-radius: 10px;
+}

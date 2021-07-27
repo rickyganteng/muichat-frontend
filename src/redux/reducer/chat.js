@@ -1,19 +1,20 @@
 const initialState = {
-  data: {},
+  data: [],
   isLoading: false,
   isError: false,
+
   msg: "",
 };
 
-const auth = (state = initialState, action) => {
+const chat = (state = initialState, action) => {
   switch (action.type) {
-    case "LOGIN_PENDING":
+    case "GET_DATA_CHAT_PENDING":
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "LOGIN_FULFILLED":
+    case "GET_DATA_CHAT_FULFILLED":
       return {
         ...state,
         isLoading: false,
@@ -21,21 +22,21 @@ const auth = (state = initialState, action) => {
         data: action.payload.data.data,
         msg: action.payload.data.msg,
       };
-    case "LOGIN_REJECTED":
+    case "GET_DATA_CHAT_REJECTED":
       return {
         ...state,
         isLoading: false,
         isError: true,
-        data: {},
+        data: [],
         msg: action.payload.response.data.msg,
       };
-    case "REGISTER_PENDING":
+    case "POST_DATA_PENDING":
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "REGISTER_FULFILLED":
+    case "POST_DATA_FULFILLED":
       return {
         ...state,
         isLoading: false,
@@ -43,12 +44,12 @@ const auth = (state = initialState, action) => {
         data: action.payload.data.data,
         msg: action.payload.data.msg,
       };
-    case "REGISTER_REJECTED":
+    case "POST_DATA_REJECTED":
       return {
         ...state,
         isLoading: false,
         isError: true,
-        data: {},
+        data: [],
         msg: action.payload.response.data.msg,
       };
     default:
@@ -56,4 +57,4 @@ const auth = (state = initialState, action) => {
   }
 };
 
-export default auth;
+export default chat;

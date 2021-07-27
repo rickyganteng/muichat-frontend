@@ -1,14 +1,14 @@
-import axiosApiInstances from "../../utils/axios";
+import axiosApiIntances from "../../utils/axios";
 
 export const login = (data) => {
   return {
     type: "LOGIN",
-    payload: axiosApiInstances.post("auth/login", data),
+    payload: axiosApiIntances.post("/auth/login", data),
   };
 };
-export const registerAccount = (data) => {
+export const register = (data) => {
   return {
     type: "REGISTER",
-    payload: axiosApiInstances.post("auth/register", data),
+    payload: axiosApiIntances.post("/auth/register", data),
   };
 };

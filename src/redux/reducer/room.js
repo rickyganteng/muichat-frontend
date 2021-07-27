@@ -5,7 +5,7 @@ const initialState = {
   msg: "",
 };
 
-const user = (state = initialState, action) => {
+const room = (state = initialState, action) => {
   switch (action.type) {
     case "GET_ALL_DATA_PENDING":
       return {
@@ -26,16 +26,16 @@ const user = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: true,
-        data: [],
+        data: {},
         msg: action.payload.response.data.msg,
       };
-    case "GET_DATA_ID_PENDING":
+    case "GET_ALL_DATA_ID_ROOM_PENDING":
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "GET_DATA_ID_FULFILLED":
+    case "GET_ALL_DATA_ID_ROOM_FULFILLED":
       return {
         ...state,
         isLoading: false,
@@ -43,21 +43,21 @@ const user = (state = initialState, action) => {
         data: action.payload.data.data,
         msg: action.payload.data.msg,
       };
-    case "GET_DATA_ID_REJECTED":
+    case "GET_ALL_DATA_ID_ROOM_REJECTED":
       return {
         ...state,
         isLoading: false,
         isError: true,
-        data: [],
+        data: {},
         msg: action.payload.response.data.msg,
       };
-    case "UPDATE_PHONE_PENDING":
+    case "POST_DATA_PENDING":
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "UPDATE_PHONE_FULFILLED":
+    case "POST_DATA_FULFILLED":
       return {
         ...state,
         isLoading: false,
@@ -65,21 +65,21 @@ const user = (state = initialState, action) => {
         data: action.payload.data.data,
         msg: action.payload.data.msg,
       };
-    case "UPDATE_PHONE_REJECTED":
+    case "POST_DATA_REJECTED":
       return {
         ...state,
         isLoading: false,
         isError: true,
-        data: [],
+        data: {},
         msg: action.payload.response.data.msg,
       };
-    case "UPDATE_DATA_PENDING":
+    case "DELETE_DATA_PENDING":
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "UPDATE_DATA_FULFILLED":
+    case "DELETE_DATA_FULFILLED":
       return {
         ...state,
         isLoading: false,
@@ -87,34 +87,12 @@ const user = (state = initialState, action) => {
         data: action.payload.data.data,
         msg: action.payload.data.msg,
       };
-    case "UPDATE_DATA_REJECTED":
+    case "DELETE_DATA_REJECTED":
       return {
         ...state,
         isLoading: false,
         isError: true,
-        data: [],
-        msg: action.payload.response.data.msg,
-      };
-    case "UPDATE_IMAGE_PENDING":
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-      };
-    case "UPDATE_IMAGE_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        isError: false,
-        data: action.payload.data.data,
-        msg: action.payload.data.msg,
-      };
-    case "UPDATE_IMAGE_REJECTED":
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-        data: [],
+        data: {},
         msg: action.payload.response.data.msg,
       };
     default:
@@ -122,4 +100,4 @@ const user = (state = initialState, action) => {
   }
 };
 
-export default user;
+export default room;

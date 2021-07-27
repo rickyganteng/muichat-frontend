@@ -1,4 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap");
 
 @media (max-width: 512px) {
   .mainColChat {
@@ -25,7 +25,28 @@
     padding-top: 30px !important;
   }
 }
-
+.modalPhone {
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 23px;
+  color: #232323;
+  margin-bottom: 18px;
+  text-align: center;
+  margin-top: 30px;
+}
+.textModalPhone {
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #232323;
+  margin-bottom: 18px;
+  text-align: center;
+  margin-top: 30px;
+}
 .chat {
   max-width: 100%;
   border: 1px solid #ddd;
@@ -52,10 +73,16 @@ h2 {
 }
 
 .chatWindow {
-  height: 535px;
-  overflow: auto;
+  height: 400px;
   background: #f9f9f9;
   overflow-y: scroll;
+}
+.rowChat {
+  padding: 0px !important;
+  width: 100%;
+}
+.colChat {
+  padding: 0px !important;
 }
 .left {
   overflow-y: scroll;
@@ -112,6 +139,7 @@ h2 {
   flex-wrap: nowrap;
 }
 .title {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 29px;
@@ -130,6 +158,27 @@ h2 {
 .drop:focus {
   box-shadow: none !important;
 }
+.dropFriend {
+  padding: 0px;
+  background-color: white;
+  border: white;
+}
+.dropFriend:hover {
+  padding: 0px;
+  background-color: white;
+  border: white;
+}
+.chatTxtContainer {
+  color: #ffffff;
+  padding: 2% 4%;
+  width: fit-content;
+}
+.dropFriend:focus {
+  padding: 0px;
+  background-color: white !important;
+  border: white;
+  box-shadow: none !important;
+}
 .menuDrop {
   background: #7e98df;
   border-radius: 35px 10px 35px 35px;
@@ -137,6 +186,7 @@ h2 {
   border: #7e98df;
 }
 .item {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -160,8 +210,10 @@ h2 {
   height: 82px;
   margin: 0 auto;
   margin-bottom: 25px;
+  border-radius: 100%;
 }
 .profileName {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 22px;
@@ -171,6 +223,7 @@ h2 {
   color: #232323;
 }
 .profileId {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -190,6 +243,7 @@ h2 {
   border-radius: 15px;
 }
 .searchMessage::placeholder {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -209,6 +263,7 @@ h2 {
   padding: 0px;
 }
 .mainTextChat {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 24px;
@@ -224,8 +279,10 @@ h2 {
 .ppImg {
   width: 55px;
   margin-top: 15px;
+  border-radius: 20% 20% 20% 20%;
 }
 .name {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -236,6 +293,7 @@ h2 {
   margin-top: 18px;
 }
 .bio {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -244,6 +302,7 @@ h2 {
   color: #7e98df;
 }
 .time {
+  font-family: "Rubik", sans-serif;
   margin-top: 18px;
   font-style: normal;
   font-weight: normal;
@@ -254,6 +313,7 @@ h2 {
   color: #848484;
 }
 .notif {
+  font-family: "Rubik", sans-serif;
   background: #7e98df;
   border-radius: 30px;
   border: #7e98df 1px solid;
@@ -269,6 +329,7 @@ h2 {
 .roomImg {
   width: 64px;
   height: 64px;
+  border-radius: 20%;
 }
 .cardRoom {
   padding: 28px 53px;
@@ -280,6 +341,7 @@ h2 {
   cursor: pointer;
 }
 .nameFriend {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -292,6 +354,7 @@ h2 {
   margin-top: 10px;
 }
 .statusFriend {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
@@ -310,6 +373,7 @@ h2 {
   padding: 0px;
 }
 .formMessage {
+  font-family: "Rubik", sans-serif;
   background: #fafafa;
   border-radius: 15px;
   width: 912px;
@@ -325,6 +389,7 @@ h2 {
   border: none;
 }
 .formMessage::placeholder {
+  font-family: "Rubik", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -340,6 +405,11 @@ h2 {
   padding-top: 50px;
   cursor: pointer;
 }
+.sendMessage {
+  padding-bottom: 50px;
+  cursor: pointer;
+  transform: rotate(180deg);
+}
 .sticker {
   padding-top: 50px;
   cursor: pointer;
@@ -353,4 +423,41 @@ h2 {
 }
 .handleImage {
   cursor: pointer;
+}
+.chatTxtContainer {
+  color: #ffffff;
+  padding: 2% 4%;
+  width: fit-content;
+}
+.sender {
+  background-color: #70a1eb;
+  border-radius: 24px 24px 24px 6px;
+}
+
+.receiver {
+  background-color: #054cb8;
+  border-radius: 24px 24px 6px 24px;
+}
+.message {
+  background: #9db4f3;
+  border-radius: 35px 35px 35px 10px;
+  font-family: "Rubik", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 185.17%;
+  letter-spacing: -0.165px;
+  padding: 17px 33px;
+  color: #ffffff;
+  width: max-content;
+}
+
+.messageImg {
+  border-radius: 20px;
+  width: 54px;
+  height: 54px;
+  margin-left: 54px;
+}
+.bg {
+  background-color: #fffafa;
 }

@@ -2,18 +2,20 @@ const initialState = {
   data: [],
   isLoading: false,
   isError: false,
+
   msg: "",
 };
 
-const user = (state = initialState, action) => {
+const contact = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_ALL_DATA_PENDING":
+
+    case "GET_ALL_DATA_ID_PENDING":
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "GET_ALL_DATA_FULFILLED":
+    case "GET_ALL_DATA_ID_FULFILLED":
       return {
         ...state,
         isLoading: false,
@@ -21,7 +23,7 @@ const user = (state = initialState, action) => {
         data: action.payload.data.data,
         msg: action.payload.data.msg,
       };
-    case "GET_ALL_DATA_REJECTED":
+    case "GET_ALL_DATA_ID_REJECTED":
       return {
         ...state,
         isLoading: false,
@@ -29,13 +31,13 @@ const user = (state = initialState, action) => {
         data: [],
         msg: action.payload.response.data.msg,
       };
-    case "GET_DATA_ID_PENDING":
+    case "POST_DATA_PENDING":
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "GET_DATA_ID_FULFILLED":
+    case "POST_DATA_FULFILLED":
       return {
         ...state,
         isLoading: false,
@@ -43,43 +45,42 @@ const user = (state = initialState, action) => {
         data: action.payload.data.data,
         msg: action.payload.data.msg,
       };
-    case "GET_DATA_ID_REJECTED":
+    case "POST_DATA_REJECTED":
       return {
         ...state,
         isLoading: false,
         isError: true,
         data: [],
         msg: action.payload.response.data.msg,
-      };
-    case "UPDATE_PHONE_PENDING":
+      }; case "DELETE_CONTACT_PENDING":
       return {
         ...state,
         isLoading: true,
         isError: false,
+        msg: "",
       };
-    case "UPDATE_PHONE_FULFILLED":
+    case "DELETE_CONTACT_FULFILLED":
       return {
         ...state,
         isLoading: false,
         isError: false,
-        data: action.payload.data.data,
-        msg: action.payload.data.msg,
+        data: [],
+        msg: "",
       };
-    case "UPDATE_PHONE_REJECTED":
+    case "DELETE_CONTACT_REJECTED":
       return {
         ...state,
         isLoading: false,
         isError: true,
-        data: [],
         msg: action.payload.response.data.msg,
       };
-    case "UPDATE_DATA_PENDING":
+    case "DELETE_DATA_CONTACT_PENDING":
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case "UPDATE_DATA_FULFILLED":
+    case "DELETE_DATA_CONTACT_FULFILLED":
       return {
         ...state,
         isLoading: false,
@@ -87,29 +88,7 @@ const user = (state = initialState, action) => {
         data: action.payload.data.data,
         msg: action.payload.data.msg,
       };
-    case "UPDATE_DATA_REJECTED":
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-        data: [],
-        msg: action.payload.response.data.msg,
-      };
-    case "UPDATE_IMAGE_PENDING":
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-      };
-    case "UPDATE_IMAGE_FULFILLED":
-      return {
-        ...state,
-        isLoading: false,
-        isError: false,
-        data: action.payload.data.data,
-        msg: action.payload.data.msg,
-      };
-    case "UPDATE_IMAGE_REJECTED":
+    case "DELETE_DATA_CONTACT_REJECTED":
       return {
         ...state,
         isLoading: false,
@@ -122,4 +101,4 @@ const user = (state = initialState, action) => {
   }
 };
 
-export default user;
+export default contact;

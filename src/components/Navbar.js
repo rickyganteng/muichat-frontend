@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 class NavBar extends Component {
   handleLogout = () => {
     localStorage.clear();
-    this.props.history.push("/login");
+    this.props.history.push("/");
   };
 
   render() {
