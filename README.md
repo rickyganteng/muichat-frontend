@@ -1,4 +1,4 @@
-<h1 align='center'>React JS - Ticketing-Web-FrontEnd</h1>
+<h1 align='center'>React JS - MuiChat-FrontEnd</h1>
   <p align="center">
     <a href="https://muichat.netlify.app/chat">View Demo</a>
     ·
