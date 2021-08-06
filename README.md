@@ -7,7 +7,7 @@
     <a href="https://github.com/rickyganteng/muichat-frontend/pulls">Request Feature</a>
   </p>
 
-![Image Banner](src/assets/img/Screenshot_2.jpg)
+![Image Banner](src/assets/img/ssmuicha.jpg)
 
 ## About The Project
 
