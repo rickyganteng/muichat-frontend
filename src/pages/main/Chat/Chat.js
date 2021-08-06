@@ -43,7 +43,7 @@ function Chat(props) {
   const [isProfileFriend, setIsProfileFriend] = useState(false);
   const [idRoom, setIdRoom] = useState("");
 
-  const [notif, setNotif] = useState({ show: false });
+  const [notif, setNotif] = useState({ show: true });
 
   const userid = localStorage.getItem("userId");
   const username = localStorage.getItem("userName");
@@ -79,6 +79,7 @@ function Chat(props) {
   useEffect(() => {
     if (props.socket) {
       props.socket.on("chatMessage", (dataMessage) => {
+        // console.log(dataMessage);
         setMessages([...messages, dataMessage]);
       });
 
@@ -104,9 +105,9 @@ function Chat(props) {
       setUserOnline(listUserOnline);
     });
 
-    props.socket.on("notif-message", (data) => {
-      console.log('data notif', data);
-      setNotif(data);
+    props.socket.on("notif-message", (dataa) => {
+      console.log(dataa);
+      setNotif(dataa);
     });
     props.socket.on("typing", (data) => {
       // console.log(data);
@@ -252,7 +253,7 @@ function Chat(props) {
     return Users.push(parseInt(item));
   });
   // console.log(userOnline);
-  // // console.log(dataFriend.akun_id);
+  // console.log(dataFriend.akun_id);
   // console.log(notif);
   return (
     <Container fluid className={styles.bg}>
@@ -264,15 +265,14 @@ function Chat(props) {
             delay={3000}
             autohide
           >
-            <Toast.Header closeButton={false}>
-              <strong className="me-auto">Telegram App ({notif.userName})</strong>
-              <small className="text-muted">just now</small>
+            <Toast.Header>
+              <strong className="me-auto">Bootstrap</strong>
+              <small>11 mins ago</small>
             </Toast.Header>
-            <Toast.Body>{notif.message}</Toast.Body>
+            <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
           </Toast>
         </div>
       )}
-      hoihoihoihohiohihoi
       {invite && (
         <InviteFriend
           show={invite}
@@ -404,7 +404,6 @@ function Chat(props) {
                 </Row>
               </Card>
             </Card>
-
             {dataRoom.map((item, index) => {
               // console.log(item);
               return (

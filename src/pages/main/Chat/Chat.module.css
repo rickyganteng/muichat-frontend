@@ -128,7 +128,7 @@ h2 {
   border-radius: 0 0 2px 2px;
 }
 .mainCard {
-  padding: 43px 30px;
+  padding: 33px 30px;
   border: none;
 }
 .mainCol {
@@ -211,6 +211,7 @@ h2 {
   margin: 0 auto;
   margin-bottom: 25px;
   border-radius: 100%;
+  object-fit: cover;
 }
 .profileName {
   font-family: "Rubik", sans-serif;
@@ -221,6 +222,7 @@ h2 {
   letter-spacing: -0.165px;
   text-align: center;
   color: #232323;
+  margin-top: -25px;
 }
 .profileId {
   font-family: "Rubik", sans-serif;
@@ -231,11 +233,13 @@ h2 {
   text-align: center;
   letter-spacing: 1.335px;
   color: #848484;
+  margin-top: -10px;
 }
 .cardContact {
-  margin-top: 40px;
+  margin-top: 10px;
   width: 100%;
   border: none;
+  margin-bottom: -30px;
 }
 .searchMessage {
   height: 60px;
@@ -247,7 +251,7 @@ h2 {
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
-  line-height: 25px;
+  line-height: 35px;
   letter-spacing: -0.165px;
   color: #848484;
 }
@@ -280,6 +284,7 @@ h2 {
   width: 55px;
   margin-top: 15px;
   border-radius: 20% 20% 20% 20%;
+  object-fit: cover;
 }
 .name {
   font-family: "Rubik", sans-serif;
@@ -329,7 +334,8 @@ h2 {
 .roomImg {
   width: 64px;
   height: 64px;
-  border-radius: 20%;
+  border-radius: 20px;
+  object-fit: cover;
 }
 .cardRoom {
   padding: 28px 53px;
@@ -339,6 +345,7 @@ h2 {
   float: right;
   padding: 20px;
   cursor: pointer;
+  margin-left: 32px;
 }
 .nameFriend {
   font-family: "Rubik", sans-serif;
@@ -350,7 +357,7 @@ h2 {
   letter-spacing: -0.165px;
   color: #232323;
   margin-bottom: 7px;
-  margin-left: 8px;
+  margin-left: -140px;
   margin-top: 10px;
 }
 .statusFriend {
@@ -362,7 +369,18 @@ h2 {
   text-align: left;
   letter-spacing: -0.165px;
   color: #7e98df;
-  margin-left: 8px;
+  margin-left: -140px;
+}
+@media (max-width: 767.98px) {
+  .statusFriend {
+    margin-left: 8px;
+  }
+  .nameFriend {
+    margin-left: 8px;
+  }
+  .cardProfile {
+    display: none;
+  }
 }
 .cardMessage {
   position: fixed;
