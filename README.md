@@ -22,7 +22,7 @@ an online cinema ticket purchase website that is easy to use for all ages.
 
 1. <a href="https://nodejs.org/en/download/">Node Js</a>
 2. Node_modules `npm install` or `yarn install`
-3. Back End Ticketing-Web API <a href="https://github.com/rickyganteng/Ticketing-web-API"> here </a>
+3. Back End Ticketing-Web API <a href="https://github.com/rickyganteng/muichat---backend"> here </a>
 
 ## Getting Started
 
