@@ -51,7 +51,7 @@ class AddRoom extends Component {
                     <Col xs={2}>
                       <Card.Img
                         type="left"
-                        src={`http://localhost:3009/backend3/api/${item.akun_image}`}
+                        src={`https://chatmui.herokuapp.com/backend3/api/${item.akun_image}`}
                         className={styles.imgFriend}
                       />
                     </Col>

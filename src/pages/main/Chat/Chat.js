@@ -43,7 +43,7 @@ function Chat(props) {
   const [isProfileFriend, setIsProfileFriend] = useState(false);
   const [idRoom, setIdRoom] = useState("");
 
-  const [notif, setNotif] = useState({ show: true });
+  const [notif, setNotif] = useState({ show: false });
 
   const userid = localStorage.getItem("userId");
   const username = localStorage.getItem("userName");
@@ -105,9 +105,9 @@ function Chat(props) {
       setUserOnline(listUserOnline);
     });
 
-    props.socket.on("notif-message", (dataa) => {
-      console.log(dataa);
-      setNotif(dataa);
+    props.socket.on("notif-message", (data) => {
+      console.log(data);
+      setNotif(data);
     });
     props.socket.on("typing", (data) => {
       // console.log(data);
@@ -133,22 +133,9 @@ function Chat(props) {
     }, 2000);
   };
   const handleSendMessage = (data) => {
-    // console.log(props);
-    // console.log(data);
-    // console.log("Username :", data.user_name);
-    // console.log("Room :", selectRoom);
-    // console.log("Send Message :", message);
-    // const setData = {
-    //   username,
-    //   message,
-    // };
-    // props.socket.emit("globalMessage", setData);
-    // props.socket.emit("privateMessage", setData);
-    // props.socket.emit("broadcastMessage", setData);
-
     const setData = {
       userid: parseInt(userid),
-      friendId: data,
+      friendId: dataFriend.akun_id,
       room: selectRoom,
       userName: username,
       show: true,
@@ -160,8 +147,7 @@ function Chat(props) {
       roomChat: selectRoom,
       Message: message,
     };
-    console.log("asdasdda", setData);
-    props.socket.emit("notif-message", setData);
+    // console.log("asdasdda", setData);
     props.socket.emit("typing", {
       userName: username,
       room: room.new,
@@ -171,6 +157,7 @@ function Chat(props) {
     props.postData(setDataChat).then((res) => {
       props.socket.emit("roomMessage", setData);
     });
+    props.socket.emit("notif-message", setData);
     setMessage("");
   };
   // const handleSetting = () => {
@@ -254,11 +241,11 @@ function Chat(props) {
   });
   // console.log(userOnline);
   // console.log(dataFriend.akun_id);
-  // console.log(notif);
+  console.log(notif);
   return (
     <Container fluid className={styles.bg}>
       {click && (
-        <div style={{ position: "absolute", top: 20, right: 20 }}>
+        <div style={{ position: "fixed", top: 20, right: 20 }}>
           <Toast
             onClose={() => setNotif({ ...notif, show: false })}
             show={notif.show}
@@ -266,13 +253,27 @@ function Chat(props) {
             autohide
           >
             <Toast.Header>
-              <strong className="me-auto">Bootstrap</strong>
-              <small>11 mins ago</small>
+              <strong className="me-auto">Muichat ({notif.userName})</strong>
+              <small>Just Now</small>
             </Toast.Header>
-            <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
+            <Toast.Body>{notif.message}</Toast.Body>
           </Toast>
         </div>
       )}
+      <div style={{ position: "fixed", top: 20, right: 20 }}>
+        <Toast
+          onClose={() => setNotif({ ...notif, show: false })}
+          show={notif.show}
+          delay={3000}
+          autohide
+        >
+          <Toast.Header>
+            <strong className="me-auto">Muichat ({notif.userName})</strong>
+            <small>Just Now</small>
+          </Toast.Header>
+          <Toast.Body>{notif.message}</Toast.Body>
+        </Toast>
+      </div>
       {invite && (
         <InviteFriend
           show={invite}
@@ -357,7 +358,7 @@ function Chat(props) {
 
               <Card className={styles.cardProfile} onClick={handleEdit}>
                 <Card.Img
-                  src={`http://localhost:3009/backend3/api/${data.akun_image}`}
+                  src={`https://chatmui.herokuapp.com/backend3/api/${data.akun_image}`}
                   variant="top"
                   className={styles.profileImg}
                 />
@@ -418,7 +419,7 @@ function Chat(props) {
                       <Col>
                         <Card.Img
                           variant="left"
-                          src={`http://localhost:3009/backend3/api/${item.akun_image}`}
+                          src={`https://chatmui.herokuapp.com/backend3/api/${item.akun_image}`}
                           className={styles.ppImg}
                         />
                       </Col>
@@ -448,6 +449,20 @@ function Chat(props) {
           {click ? (
             <>
               <Card className={styles.cardRoom}>
+                <div style={{ position: "fixed", top: 20, right: 20 }}>
+                  <Toast
+                    onClose={() => setNotif({ ...notif, show: false })}
+                    show={notif.show}
+                    delay={3000}
+                    autohide
+                  >
+                    <Toast.Header>
+                      <strong className="me-auto">Muichat ({notif.userName})</strong>
+                      <small>Just Now</small>
+                    </Toast.Header>
+                    <Toast.Body>{notif.message}</Toast.Body>
+                  </Toast>
+                </div>
                 <Row>
                   <Col
                     xs={isProfileFriend ? 2 : 3}
@@ -455,7 +470,7 @@ function Chat(props) {
                   >
                     <Card.Img
                       variant="left"
-                      src={`http://localhost:3009/backend3/api/${dataFriend.akun_image}`}
+                      src={`https://chatmui.herokuapp.com/backend3/api/${dataFriend.akun_image}`}
                       className={styles.roomImg}
                       onClick={handleHome}
                     />
@@ -605,7 +620,7 @@ function Chat(props) {
 
               <Card className={styles.cardProfile}>
                 <Card.Img
-                  src={`http://localhost:3009/backend3/api/${dataFriend.akun_image}`}
+                  src={`https://chatmui.herokuapp.com/backend3/api/${dataFriend.akun_image}`}
                   variant="top"
                   className={styles.profileImg}
                 />

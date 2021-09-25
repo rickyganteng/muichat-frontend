@@ -89,7 +89,7 @@ class InviteFriend extends Component {
                   <Card key={index} className={styles.cardFriend}>
                     <Card.Img
                       type="top"
-                      src={`http://localhost:3009/backend3/api/${item.akun_image}`}
+                      src={`https://chatmui.herokuapp.com/backend3/api/${item.akun_image}`}
                       className={styles.imgFriend}
                     />
 

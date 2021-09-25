@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosApiIntances = axios.create({
-  baseURL: "http://localhost:3009/backend3/api/v1/",
+  baseURL: "https://chatmui.herokuapp.com/backend3/api/v1/",
 });
 
 // Add a request interceptor

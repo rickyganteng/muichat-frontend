@@ -227,7 +227,7 @@ class EditProfile extends Component {
                     </Alert>
                   )}
                   <Card.Img
-                    src={`http://localhost:3009/backend3/api/${akun_image}`}
+                    src={`https://chatmui.herokuapp.com/backend3/api/${akun_image}`}
                     variant="top"
                     className={styles.profileImg}
                   />
